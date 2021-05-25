@@ -37,14 +37,13 @@ public class CRC16 {
                 0x8201, 0x42C0, 0x4380, 0x8341, 0x4100, 0x81C1, 0x8081, 0x4040,
         };
 
-    public static short crc16(byte[] bytes) {
+    public static short crc16(final byte[] input_msg, final int offset, final int length) {
         int crc = 0x0000;
-        for (byte b : bytes) {
+        for (int i = offset; i < offset+length; i++) {
+            final byte b = input_msg[i];
             crc = (crc >>> 8) ^ table[(crc ^ b) & 0xff];
         }
-
         return (short)crc;
-
     }
 
 }
